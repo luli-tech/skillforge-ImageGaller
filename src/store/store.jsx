@@ -3,10 +3,12 @@ import {
     createAsyncThunk,
     createSlice,
 } from "@reduxjs/toolkit";
-
+import url from "../apis";
 function getFavourite(favourite) {
     localStorage.setItem("favourites", JSON.stringify(favourite));
 }
+
+
 
 const initialState = {
     photos: JSON.parse(localStorage.getItem("photos") || "[]"),
@@ -15,14 +17,14 @@ const initialState = {
     isLoading: false,
     error: null,
     message: "",
-    isDarkMode: false,
+    isDarkMode: JSON.parse(localStorage.getItem("isDarkMode") || "false"),
 };
 
 export const fetchData = createAsyncThunk(
     "data/fetchData",
     async (_, thunkAPI) => {
         try {
-            const response = await fetch(`https://jsonplaceholder.typicode.com/photos`);
+            const response = await fetch(url);
             if (!response.ok) {
                 return thunkAPI.rejectWithValue("Failed to fetch data");
             }
@@ -74,6 +76,7 @@ const photoSlice = createSlice({
         },
         getDarkMode(state) {
             state.isDarkMode = !state.isDarkMode;
+            localStorage.setItem("isDarkMode", JSON.stringify(state.isDarkMode));
         },
     },
     extraReducers: (builder) => {
