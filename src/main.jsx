@@ -12,7 +12,7 @@ if (rootElement) {
   createRoot(rootElement).render(
     <StrictMode>
       <Provider store={store}>
-        <ToastContainer />
+        <ToastContainer position="top -left" autoClose={800} />
         <App />
       </Provider>
     </StrictMode>

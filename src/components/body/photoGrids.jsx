@@ -79,9 +79,9 @@ const PhotoGrids = () => {
                             <p className={`font-semibold ${isDarkMode ? "text-white" : "text-gray-800"}`}>
                                 ID: {photo.id}
                             </p>
-                            <p className={`truncate ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
+                            {/* <p className={`truncate ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
                                 Title: {photo.title}
-                            </p>
+                            </p> */}
                         </div>
                         <button
                             onClick={(e) => {

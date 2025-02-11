@@ -46,10 +46,10 @@ const photoSlice = createSlice({
             if (!exist) {
                 state.message = "Photo added to Favourite";
                 state.favourite.push(action.payload);
-                toast.success(state.message)
+                toast.success(state.message, { position: "top-left" }, { autoClose: 2000 });
             } else {
                 state.message = "Photo already addded to Favourite";
-                toast.info(state.message)
+                toast.info(state.message, { position: "top-left" }, { autoClose: 2000 });
             }
             getFavourite(state.favourite);
         },
@@ -58,7 +58,7 @@ const photoSlice = createSlice({
                 (photo) => photo.id !== action.payload.id
             );
             state.message = "Photo removed from Favourite";
-            toast.success(state.message);
+            toast.success(state.message, { position: "top-left" }, { autoClose: 2000 });
             getFavourite(state.favourite);
         },
         handleSearch(state, action) {
@@ -69,7 +69,7 @@ const photoSlice = createSlice({
                 state.photos = [...state.allPhotos];
                 localStorage.setItem("filteredPhotos", JSON.stringify(state.allPhotos));
                 state.message = "No search query found. ID should be a number";
-                toast.error(state.message);
+                toast.error(state.message, { autoClose: 2000 }, { position: "top-left" });
                 return;
 
             }
@@ -118,6 +118,10 @@ const store = configureStore({
     reducer: {
         photo: photoSlice.reducer,
     },
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: false, // Disable the serialization check
+        }),
 });
 
 export default store;
