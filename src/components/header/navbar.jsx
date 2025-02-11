@@ -24,6 +24,7 @@ const Navbar = () => {
           <Link to="/" className="text-xl font-bold">
             ImageGallery
           </Link>
+          <div className=""><DarkModeToggle /></div>
           <button className="md:hidden" onClick={toggleSidebar}>
             <svg
               className="w-6 h-6"
@@ -40,8 +41,6 @@ const Navbar = () => {
               ></path>
             </svg>
           </button>
-          {/* <button className="cursor-pointer" onClick={toggleDarkMode}>Darktoggle</button> */}
-          <DarkModeToggle />
           <div className="hidden md:flex space-x-4">
             <Link to="/" className="hover:bg-gray-700 px-3 py-2 rounded">
               Home
@@ -53,7 +52,9 @@ const Navbar = () => {
               Favourites
             </Link>
           </div>
+
         </div>
+
       </nav>
       <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
       <div className="container min-w-10 pt-18 mx-auto p-2">

@@ -84,7 +84,7 @@ const photoSlice = createSlice({
             state.isDarkMode = !state.isDarkMode;
             localStorage.setItem("isDarkMode", JSON.stringify(state.isDarkMode));
             state.message = state.isDarkMode ? "Dark Mode Enabled" : "Light Mode Enabled";
-            toast.info(state.message);
+            toast.info(state.message, { position: "top-left" }, { autoClose: 800 });
         },
     },
     extraReducers: (builder) => {
@@ -102,7 +102,7 @@ const photoSlice = createSlice({
             .addCase(fetchData.rejected, (state, action) => {
                 state.isLoading = false;
                 state.message = "Failed to fetch data";
-                toast.error(state.message);
+                toast.error(state.message, { position: "top-left" }, { autoClose: 800 });
             });
     },
 });
