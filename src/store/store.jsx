@@ -3,12 +3,13 @@ import {
     createAsyncThunk,
     createSlice,
 } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 import url from "../apis";
+import 'react-toastify/dist/ReactToastify.css';
+
 function getFavourite(favourite) {
     localStorage.setItem("favourites", JSON.stringify(favourite));
 }
-
-
 
 const initialState = {
     photos: JSON.parse(localStorage.getItem("photos") || "[]"),
@@ -16,7 +17,6 @@ const initialState = {
     favourite: JSON.parse(localStorage.getItem("favourites") || "[]"),
     isLoading: false,
     error: null,
-    message: "",
     isDarkMode: JSON.parse(localStorage.getItem("isDarkMode") || "false"),
 };
 
@@ -44,10 +44,12 @@ const photoSlice = createSlice({
                 (photo) => photo.id == action.payload.id
             );
             if (!exist) {
+                state.message = "Photo added to Favourite";
                 state.favourite.push(action.payload);
-                state.message = "item added to bookmark";
+                toast.success(state.message)
             } else {
-                state.message = "item already added to favourite";
+                state.message = "Photo already addded to Favourite";
+                toast.info(state.message)
             }
             getFavourite(state.favourite);
         },
@@ -55,17 +57,21 @@ const photoSlice = createSlice({
             state.favourite = state.favourite.filter(
                 (photo) => photo.id !== action.payload.id
             );
-            state.message = "item removed from bookmark";
+            state.message = "Photo removed from Favourite";
+            toast.success(state.message);
             getFavourite(state.favourite);
         },
         handleSearch(state, action) {
             const query = action.payload.trim();
             localStorage.setItem("searchQuery", query);
 
-            if (!query) {
+            if (!query || isNaN(query)) {
                 state.photos = [...state.allPhotos];
                 localStorage.setItem("filteredPhotos", JSON.stringify(state.allPhotos));
+                state.message = "No search query found. ID should be a number";
+                toast.error(state.message);
                 return;
+
             }
 
             state.photos = state.allPhotos.filter((photo) =>
@@ -77,6 +83,8 @@ const photoSlice = createSlice({
         getDarkMode(state) {
             state.isDarkMode = !state.isDarkMode;
             localStorage.setItem("isDarkMode", JSON.stringify(state.isDarkMode));
+            state.message = state.isDarkMode ? "Dark Mode Enabled" : "Light Mode Enabled";
+            toast.info(state.message);
         },
     },
     extraReducers: (builder) => {
@@ -93,7 +101,8 @@ const photoSlice = createSlice({
             })
             .addCase(fetchData.rejected, (state, action) => {
                 state.isLoading = false;
-                state.error = action.payload;
+                state.message = "Failed to fetch data";
+                toast.error(state.message);
             });
     },
 });

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { handleSearch } from "../../store/store";
 
-const SearchBar = () => {
+const SearchBar = ({ onNewSearch, handlePageChange }) => {
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
 
@@ -13,6 +13,8 @@ const SearchBar = () => {
   const onSearch = () => {
     dispatch(handleSearch(query)); // Dispatch the query to the Redux store
     setQuery(""); // Clear the input after the search
+    handlePageChange(1)
+    onNewSearch(); // Notify parent component about the new search
   };
 
   return (

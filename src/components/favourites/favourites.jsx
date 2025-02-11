@@ -1,16 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromFavourite } from "../../store/store";
-
 const Favourites = () => {
   const dispatch = useDispatch();
   const { favourite } = useSelector((state) => state.photo);
 
   function removeFavourite(photo) {
-    dispatch(removeFromFavourite(photo));
+    dispatch(removeFromFavourite(photo))
   }
 
   return (
-    <div className="p-4 container">
+    <div className="p-4 container h-full">
       <h1 className="font-bold text-4xl mb-5">Favourites</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {favourite.map((photo) => (

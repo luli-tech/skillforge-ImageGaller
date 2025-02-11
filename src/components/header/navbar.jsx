@@ -2,19 +2,26 @@ import { useState } from "react";
 import Sidebar from "./sidebar";
 import { Outlet } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getDarkMode } from "../../store/store";
+import DarkModeToggle from "../body/DarkModeToggle";
 
 const Navbar = () => {
+  let dispatch = useDispatch()
   const [isOpen, setIsOpen] = useState(false);
-
+  let { isDarkMode } = useSelector((state) => state.photo);
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
-  };
+  }
+  function toggleDarkMode() {
+    dispatch(getDarkMode());
+  }
 
   return (
     <div>
-      <nav className="bg-gray-800 p-4 z-10 fixed w-[100%]  text-white">
+      <nav className={`p-4 ${isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"} z-10 fixed w-[100%]`}>
         <div className="container mx-auto flex justify-between items-center">
-          <Link to="#" className="text-xl font-bold">
+          <Link to="/" className="text-xl font-bold">
             ImageGallery
           </Link>
           <button className="md:hidden" onClick={toggleSidebar}>
@@ -33,6 +40,8 @@ const Navbar = () => {
               ></path>
             </svg>
           </button>
+          {/* <button className="cursor-pointer" onClick={toggleDarkMode}>Darktoggle</button> */}
+          <DarkModeToggle />
           <div className="hidden md:flex space-x-4">
             <Link to="/" className="hover:bg-gray-700 px-3 py-2 rounded">
               Home

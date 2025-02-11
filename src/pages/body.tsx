@@ -1,9 +1,8 @@
-import SearchBar from "../components/body/searchBar";
+import React from "react";
 import PhotoGrids from "../components/body/photoGrids";
 const Body = () => {
   return (
     <div>
-      <SearchBar />
       <PhotoGrids />
     </div>
   );

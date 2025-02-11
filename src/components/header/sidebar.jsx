@@ -8,7 +8,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     <div
       onClick={toggleSidebar}
       className={`fixed lg:hidden md:hidden inset-0 bg-gray-800 bg-opacity-[10px] z-50 transform ${isOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out`}
+        } transition-transform duration-300 bg-transparent ease-in-out`}
     >
       <div
         className={`w-64 transform ${isOpen ? "translate-x-0" : "-translate-x-full"

@@ -1,15 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, onPageChange, newSearch }) => {
   const pageNumbers = [];
 
-  // Start by adding the first page
   pageNumbers.push(1);
 
-  // Add ellipses if current page is more than 2 pages away from first
   if (currentPage > 3) pageNumbers.push("...");
 
-  // Add 3 pages before and after current page
   for (
     let i = Math.max(2, currentPage - 2);
     i <= Math.min(totalPages - 1, currentPage + 2);
@@ -29,6 +26,12 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     onPageChange(page);
     window.scrollTo({ top: 0, behavior: "smooth" }); // Scroll to the top with smooth animation
   };
+
+  useEffect(() => {
+    if (newSearch) {
+      onPageChange(1);
+    }
+  }, [newSearch, onPageChange]);
 
   return (
     <div className="flex justify-center items-center mt-6 gap-2 sm:gap-1">
