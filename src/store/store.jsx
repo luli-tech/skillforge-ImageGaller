@@ -99,7 +99,7 @@ const photoSlice = createSlice({
                 state.allPhotos = action.payload;
                 localStorage.setItem("photos", JSON.stringify(action.payload));
             })
-            .addCase(fetchData.rejected, (state, action) => {
+            .addCase(fetchData.rejected, (state) => {
                 state.isLoading = false;
                 state.message = "Failed to fetch data";
                 toast.error(state.message, { position: "top-left" }, { autoClose: 800 });

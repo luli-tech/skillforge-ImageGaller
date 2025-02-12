@@ -5,7 +5,7 @@ const ImageModal = ({ image, setClose }) => {
       className="over fixed inset-0 flex items-center justify-center overflow-hidden bg-black  z-50"
     >
       <div
-        className="bg-white rounded-lg shadow-lg p-6 w-[600px] relative"
+        className="bg-white text-black md:max-w-[600px] lg:max-w-[600px] w-full rounded-lg shadow-lg p-6 relative"
         onClick={(e) => e.stopPropagation()} // Prevent modal from closing when clicking inside
       >
         {/* Close Button */}
@@ -25,7 +25,7 @@ const ImageModal = ({ image, setClose }) => {
 
         {/* Image Details */}
         <div className="mt-4 text-center px-4">
-          <h2 className="text-2xl font-semibold">{image?.title || "No Title"}</h2>
+          <h2 className="text-2xl text-black font-semibold">{image?.title || "No Title"}</h2>
           <p className="text-gray-600 text-lg">ID: {image?.id || "N/A"}</p>
         </div>
       </div>

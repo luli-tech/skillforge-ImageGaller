@@ -61,6 +61,7 @@ const PhotoGrids = () => {
 
     return (
         <div className={`p-4 ${isDarkMode ? "bg-gray-900 text-white" : "bg-white text-black"}`}>
+            <h1 className="font-bold text-3xl">HomePage</h1>
             <SearchBar isDarkMode={isDarkMode} onNewSearch={handleNewSearch} handlePageChange={handlePageChange} />
             {close && <ImageModal image={modal} setClose={setClose} />}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
